@@ -1,29 +1,42 @@
-export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+import Radio from "./components/Radio";
+
+interface RadioOption {
+  label: string;
+  value: string;
+}
+
+async function fetchRadioOptions() {
+  const res = await fetch(`${process.env.CUSTOM_DOMAIN}/api/radio-options`);
+  const options = await res.json();
+  return options;
+}
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
   const { error } = await searchParams;
 
-  
   const customDomain = process.env.CUSTOM_DOMAIN;
+
+  const options = await fetchRadioOptions();
 
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form method="POST" action={`${customDomain}/api/set-option`}>
         <fieldset>
-          <legend>Select an option:</legend>
-          <label>
-            <input type="radio" name="option" value="option1" />
-            Option 1
-          </label>
-          <br />
-          <label>
-            <input type="radio" name="option" value="option2" />
-            Option 2
-          </label>
-          <br />
-          <label>
-            <input type="radio" name="option" value="option3" />
-            Option 3
-          </label>
+          <legend>Select your profession:</legend>
+          {options.length > 0 ? (
+            options.map(({ label, value }: RadioOption) => (
+              <div key={value}>
+                <Radio value={value} label={label} name="option" />
+              </div>
+            ))
+          ) : (
+            <p>Loading options...</p>
+          )}
         </fieldset>
         <button type="submit">Submit</button>
       </form>
