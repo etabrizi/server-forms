@@ -1,9 +1,10 @@
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
+  const customDomain = process.env.NEXT_PUBLIC_CUSTOM_DOMAIN;
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form method="POST" action="/api/set-option">
+      <form method="POST" action={`${customDomain}/api/set-option`}>
         <fieldset>
           <legend>Select an option:</legend>
           <label>
