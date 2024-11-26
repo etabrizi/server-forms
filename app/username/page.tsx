@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export default async function UsernamePage({ searchParams }: { searchParams: { [key: string]: string } }) {
+export default async function UsernamePage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
   
   const cookieStore = await cookies(); // Await cookies() to resolve the Promise

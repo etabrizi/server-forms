@@ -1,4 +1,4 @@
-export default async function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
+export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
   return (
     <div>
