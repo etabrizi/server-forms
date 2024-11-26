@@ -1,6 +1,9 @@
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
-  const customDomain = process.env.CUSTOM_DOMAIN;
+
+  // Fallback to a default production domain if CUSTOM_DOMAIN is not set
+  const customDomain = process.env.CUSTOM_DOMAIN || 'https://server-form-example.netlify.app';
+
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}

@@ -5,12 +5,16 @@ export async function POST(req: Request) {
   const userName = formData.get("userName")?.toString() || "";
 
   if (!userName) {
-    const errorUrl = new URL("/username?error=Please+enter+a+valid+name", req.url);
+    // Use custom domain here for the error redirect
+    const customDomain = process.env.CUSTOM_DOMAIN || 'https://server-form-example.netlify.app';
+    const errorUrl = new URL("/username?error=Please+enter+a+valid+name", customDomain);
     return NextResponse.redirect(errorUrl.toString());
   }
 
-  const url = new URL(req.url);
-  const successUrl = `${url.origin}/success`;
+  // Use custom domain for success URL
+  const customDomain = process.env.CUSTOM_DOMAIN || 'https://server-form-example.netlify.app';
+  const successUrl = `${customDomain}/success`;
+
   const response = NextResponse.redirect(successUrl);
   response.cookies.set("userName", userName, { httpOnly: true });
 
