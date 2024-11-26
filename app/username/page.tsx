@@ -2,12 +2,8 @@ import { cookies } from "next/headers";
 
 export default async function UsernamePage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
-
-  // Fallback to a default production domain if CUSTOM_DOMAIN is not set
-  const customDomain = process.env.CUSTOM_DOMAIN || 'https://server-form-example.netlify.app';
-
-  // Get cookies
-  const cookieStore = await cookies(); // Await cookies() to resolve the Promise
+  const customDomain = process.env.CUSTOM_DOMAIN;
+  const cookieStore = await cookies(); 
   const selectedOption = cookieStore.get("selectedOption")?.value || "No option selected";
 
   return (
