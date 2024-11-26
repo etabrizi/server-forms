@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 
 export default async function UsernamePage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
-  const customDomain = process.env.NEXT_PUBLIC_CUSTOM_DOMAIN;
+  const customDomain = process.env.CUSTOM_DOMAIN;
   
   const cookieStore = await cookies(); // Await cookies() to resolve the Promise
   const selectedOption = cookieStore.get("selectedOption")?.value || "No option selected";

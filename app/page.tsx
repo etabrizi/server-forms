@@ -1,6 +1,6 @@
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const { error } = await searchParams;
-  const customDomain = process.env.NEXT_PUBLIC_CUSTOM_DOMAIN;
+  const customDomain = process.env.CUSTOM_DOMAIN;
   return (
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
