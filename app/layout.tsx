@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "../global.scss";
 
 export const metadata: Metadata = {
   title: "Server Forms Example",
@@ -13,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div className="container">
         {children}
+        </div>
       </body>
     </html>
   );

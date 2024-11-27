@@ -1,4 +1,6 @@
 import Radio from "./components/Radio";
+import Fieldset from "./components/Fieldset";
+import Button from "./components/Button";
 
 interface RadioOption {
   label: string;
@@ -26,8 +28,7 @@ export default async function Home({
     <div>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form method="POST" action={`${customDomain}/api/set-option`}>
-        <fieldset>
-          <legend>Select your profession:</legend>
+        <Fieldset legend="Select your profession:">
           {options.length > 0 ? (
             options.map(({ label, value }: RadioOption) => (
               <div key={value}>
@@ -37,8 +38,8 @@ export default async function Home({
           ) : (
             <p>Loading options...</p>
           )}
-        </fieldset>
-        <button type="submit">Submit</button>
+        </Fieldset>
+        <Button text="Next" />
       </form>
     </div>
   );
